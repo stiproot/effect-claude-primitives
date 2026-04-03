@@ -1,0 +1,27 @@
+# Claude Code Project Instructions
+
+## Effect Patterns
+
+This project uses Effect-TS. For comprehensive Effect patterns, see:
+- `.claude/rules/effect-patterns.md` - Effect coding rules
+
+Or install specific rule levels:
+```bash
+npx effect-claude-kit install --target claude --level beginner
+```
+
+## Project-Specific Instructions
+
+[Add your project-specific instructions here]
+
+### Architecture
+
+[Describe your project architecture]
+
+### Key Conventions
+
+[List your project conventions]
+
+### Important Files
+
+[Document important files and their purposes]

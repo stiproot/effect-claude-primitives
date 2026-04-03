@@ -1,0 +1,57 @@
+{
+  "name": "effect-claude-primitives",
+  "version": "1.0.0",
+  "description": "Drop-in Claude primitives for Effect-TS projects - 700+ patterns as AI-readable rules",
+  "type": "module",
+  "bin": {
+    "effect-claude-kit": "./cli/dist/install.js"
+  },
+  "files": [
+    "rules/",
+    "skills/",
+    "templates/",
+    "cli/dist/",
+    "docs/",
+    "README.md",
+    "LICENSE"
+  ],
+  "keywords": [
+    "effect",
+    "effect-ts",
+    "claude",
+    "cursor",
+    "copilot",
+    "ai-coding",
+    "coding-rules",
+    "typescript",
+    "functional-programming"
+  ],
+  "dependencies": {
+    "@effect/cli": "0.73.2",
+    "@effect/platform": "0.94.5",
+    "@effect/platform-node": "0.104.1",
+    "effect": "3.19.19"
+  },
+  "devDependencies": {
+    "@types/node": "^25.5.0",
+    "typescript": "5.9.3"
+  },
+  "scripts": {
+    "build": "tsc",
+    "clean": "rm -rf cli/dist",
+    "prepublishOnly": "npm run build"
+  },
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/effect-patterns/claude-primitives.git"
+  },
+  "bugs": {
+    "url": "https://github.com/effect-patterns/claude-primitives/issues"
+  },
+  "homepage": "https://github.com/effect-patterns/claude-primitives#readme",
+  "author": "Effect Patterns Community",
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}

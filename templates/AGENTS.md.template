@@ -1,0 +1,27 @@
+# AI Agent Instructions
+
+## Effect Skills
+
+This project uses Effect-TS patterns. Effect coding rules have been configured for AI assistance.
+
+### Installed Effect Skills
+
+<!-- EFFECT_SKILLS_AGENT_START -->
+Effect patterns installed via `effect-claude-kit install --target agent`
+<!-- EFFECT_SKILLS_AGENT_END -->
+
+## Project-Specific Agent Instructions
+
+[Add agent-specific instructions for your project]
+
+### Code Review Guidelines
+
+[Define code review expectations]
+
+### Testing Requirements
+
+[Specify testing requirements]
+
+### Documentation Standards
+
+[Outline documentation standards]

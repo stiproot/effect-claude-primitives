@@ -1,0 +1,33 @@
+# Cursor Rules Template
+
+## Effect-TS Patterns
+
+This project uses Effect-TS. Install category-specific rules:
+
+```bash
+npx effect-claude-kit install --target cursor --category error-management
+npx effect-claude-kit install --target cursor --category concurrency
+npx effect-claude-kit install --target cursor --category schema
+```
+
+Or install all rules:
+
+```bash
+npx effect-claude-kit install --target cursor --level complete
+```
+
+## Project Rules
+
+[Add your project-specific coding rules here]
+
+### Code Style
+
+- [List code style preferences]
+
+### Naming Conventions
+
+- [Document naming conventions]
+
+### Architecture Patterns
+
+- [Describe architectural patterns]
