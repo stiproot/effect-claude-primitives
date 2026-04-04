@@ -37,9 +37,10 @@
     "typescript": "5.9.3"
   },
   "scripts": {
-    "build": "tsc",
+    "build": "bun build cli/src/install.ts --outdir cli/dist --target bun --format esm && chmod +x cli/dist/install.js",
+    "build:tsc": "tsc",
     "clean": "rm -rf cli/dist",
-    "prepublishOnly": "npm run build"
+    "prepublishOnly": "bun run build"
   },
   "license": "MIT",
   "repository": {
@@ -52,6 +53,6 @@
   "homepage": "https://github.com/stiproot/effect-claude-primitives#readme",
   "author": "Effect Patterns Community",
   "engines": {
-    "node": ">=18.0.0"
+    "bun": ">=1.0.0"
   }
 }
