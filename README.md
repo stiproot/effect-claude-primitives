@@ -19,7 +19,7 @@
 #### Option A: Local Development with npm link
 ```bash
 # 1. Clone the primitives repo
-git clone https://github.com/effect-patterns/claude-primitives.git
+git clone https://github.com/stiproot/effect-claude-primitives.git
 cd effect-claude-primitives
 
 # 2. Install dependencies and build
@@ -40,7 +40,7 @@ npx effect-claude-kit install --target claude --level beginner
 #### Option B: Manual Copy (Simplest for Testing)
 ```bash
 # 1. Clone the primitives repo
-git clone https://github.com/effect-patterns/claude-primitives.git
+git clone https://github.com/stiproot/effect-claude-primitives.git
 
 # 2. Copy rules to your project
 cp effect-claude-primitives/rules/by-skill-level/beginner.md \
@@ -190,7 +190,7 @@ All primitives are templates. Fork and customize for your specific needs:
 
 ```bash
 # Fork the repo
-git clone https://github.com/effect-patterns/claude-primitives.git
+git clone https://github.com/stiproot/effect-claude-primitives.git
 cd effect-claude-primitives
 
 # Edit rules as needed
@@ -214,6 +214,6 @@ Contributions welcome! Please see [CONTRIBUTING.md](./CONTRIBUTING.md) for guide
 
 ## Support
 
-- **Issues**: [GitHub Issues](https://github.com/effect-patterns/claude-primitives/issues)
-- **Discussions**: [GitHub Discussions](https://github.com/effect-patterns/claude-primitives/discussions)
+- **Issues**: [GitHub Issues](https://github.com/stiproot/effect-claude-primitives/issues)
+- **Discussions**: [GitHub Discussions](https://github.com/stiproot/effect-claude-primitives/discussions)
 - **Effect Discord**: [Join the Effect community](https://discord.gg/effect-ts)
