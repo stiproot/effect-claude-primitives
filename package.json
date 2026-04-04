@@ -4,7 +4,7 @@
   "description": "Drop-in Claude primitives for Effect-TS projects - 700+ patterns as AI-readable rules",
   "type": "module",
   "bin": {
-    "effect-claude-kit": "./cli/dist/install.js"
+    "effect-claude-primitives": "./cli/dist/install.js"
   },
   "files": [
     "rules/",
@@ -44,12 +44,12 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/effect-patterns/claude-primitives.git"
+    "url": "https://github.com/stiproot/effect-claude-primitives.git"
   },
   "bugs": {
-    "url": "https://github.com/effect-patterns/claude-primitives/issues"
+    "url": "https://github.com/stiproot/effect-claude-primitives/issues"
   },
-  "homepage": "https://github.com/effect-patterns/claude-primitives#readme",
+  "homepage": "https://github.com/stiproot/effect-claude-primitives#readme",
   "author": "Effect Patterns Community",
   "engines": {
     "node": ">=18.0.0"

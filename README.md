@@ -4,11 +4,8 @@
 
 ## What's Inside?
 
-- **Complete Rules** (797KB): All Effect patterns in one file
-- **Beginner Rules** (1,453 lines): Start here for learning Effect
-- **Intermediate Rules** (3,449 lines): Common use cases
-- **Advanced Rules** (1,238 lines): Complex compositions
-- **Category Rules**: 24 topic-specific files (error-management, concurrency, schema, streams, etc.)
+- **Complete Rules** (797KB): All 700+ Effect patterns in one comprehensive file
+- **Category Rules**: 24 topic-specific files (error-management, concurrency, schema, streams, etc.) for focused work
 - **Skills**: Pre-configured agent skills for Cursor
 - **Templates**: Project setup templates
 
@@ -33,8 +30,8 @@ npm link
 cd ~/my-effect-project
 npm link effect-claude-primitives
 
-# 5. Use the CLI
-npx effect-claude-kit install --target claude --level beginner
+# 5. Install complete rules
+npx effect-claude-primitives
 ```
 
 #### Option B: Manual Copy (Simplest for Testing)
@@ -42,12 +39,9 @@ npx effect-claude-kit install --target claude --level beginner
 # 1. Clone the primitives repo
 git clone https://github.com/stiproot/effect-claude-primitives.git
 
-# 2. Copy rules to your project
-cp effect-claude-primitives/rules/by-skill-level/beginner.md \
+# 2. Copy complete rules to your project
+cp effect-claude-primitives/rules/effect-patterns-rules.md \
    ~/my-effect-project/.claude/rules/effect-patterns.md
-
-# Or reference in CLAUDE.md
-echo "See .claude/rules/effect-patterns.md for Effect patterns" >> ~/my-effect-project/CLAUDE.md
 ```
 
 ### Production Use (After NPM Publication)
@@ -57,12 +51,8 @@ echo "See .claude/rules/effect-patterns.md for Effect patterns" >> ~/my-effect-p
 # Install the package
 npm install -D effect-claude-primitives
 
-# Interactive installation wizard
-npx effect-claude-kit install --wizard
-
-# Or install specific rules
-npx effect-claude-kit install --target claude --level beginner
-npx effect-claude-kit install --target cursor --category error-management
+# Install complete Effect patterns
+npx effect-claude-primitives
 ```
 
 #### Option 2: Manual Installation
@@ -71,7 +61,7 @@ npx effect-claude-kit install --target cursor --category error-management
 npm install -D effect-claude-primitives
 
 # Copy rules manually
-cp node_modules/effect-claude-primitives/rules/complete/effect-patterns-rules.md \
+cp node_modules/effect-claude-primitives/rules/effect-patterns-rules.md \
    .claude/rules/effect-patterns.md
 ```
 
@@ -116,45 +106,16 @@ my-effect-project/
 - [GitHub Copilot Setup](./docs/copilot-setup.md) - GitHub Copilot instructions
 - [Windsurf Setup](./docs/windsurf-setup.md) - Windsurf configuration
 
-## Progressive Learning Path
+## Usage
 
-**Recommended approach for learning Effect:**
-
-1. **Start with Beginner** - Install `rules/by-skill-level/beginner.md`
-2. **Add Intermediate** - Once comfortable, add `intermediate.md`
-3. **Use Category-Specific** - Install topic rules for focused work (error-management, concurrency, etc.)
-4. **Complete Rules** - For comprehensive coverage, install the full 797KB ruleset
-
-## CLI Commands Reference
+Simply run the CLI to install comprehensive Effect patterns:
 
 ```bash
-# List available primitives
-npx effect-claude-kit list
-
-# List installed rules
-npx effect-claude-kit list --installed
-
-# Install with interactive wizard
-npx effect-claude-kit install --wizard
-
-# Install by skill level
-npx effect-claude-kit install --target claude --level beginner
-npx effect-claude-kit install --target claude --level intermediate
-npx effect-claude-kit install --target claude --level advanced
-npx effect-claude-kit install --target claude --level complete
-
-# Install by category
-npx effect-claude-kit install --target cursor --category error-management
-npx effect-claude-kit install --target cursor --category concurrency
-npx effect-claude-kit install --target cursor --category schema
-
-# Install to different tools
-npx effect-claude-kit install --target claude    # Claude Code (.claude/skills/)
-npx effect-claude-kit install --target cursor    # Cursor (.cursor/rules/)
-npx effect-claude-kit install --target vscode    # GitHub Copilot (.github/copilot-instructions.md)
-npx effect-claude-kit install --target windsurf  # Windsurf (.windsurf/rules/)
-npx effect-claude-kit install --target agent     # Generic (AGENTS.md)
+# Install complete Effect patterns (700+ patterns, 797KB)
+npx effect-claude-primitives
 ```
+
+This installs all Effect patterns to `.claude/rules/effect-patterns.md` in your project.
 
 ## Available Categories
 
@@ -194,7 +155,7 @@ git clone https://github.com/stiproot/effect-claude-primitives.git
 cd effect-claude-primitives
 
 # Edit rules as needed
-vim rules/by-skill-level/beginner.md
+vim rules/effect-patterns-rules.md
 
 # Use locally
 npm link

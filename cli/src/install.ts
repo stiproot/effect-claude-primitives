@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 
-import { Command, Options } from "@effect/cli";
+import { Command } from "@effect/cli";
 import { NodeContext, NodeRuntime } from "@effect/platform-node";
 import { Console, Effect } from "effect";
 import * as path from "node:path";
@@ -13,44 +13,17 @@ const __dirname = path.dirname(__filename);
 // Get the package root (two levels up from cli/dist)
 const getPackageRoot = () => path.resolve(__dirname, "..", "..");
 
-type SkillLevel = "beginner" | "intermediate" | "advanced" | "complete";
-
-const mainCommand = Command.make("effect-claude-kit", {
-  options: {
-    level: Options.text("level").pipe(
-      Options.withDescription("Skill level: beginner, intermediate, advanced, or complete"),
-      Options.withDefault("beginner" as SkillLevel)
-    ),
-  },
-}).pipe(
-  Command.withDescription("Effect Claude Primitives - Install Effect patterns for Claude Code"),
-  Command.withHandler(({ options }) =>
+const mainCommand = Command.make("effect-claude-primitives").pipe(
+  Command.withDescription("Install comprehensive Effect patterns for Claude Code"),
+  Command.withHandler(() =>
     Effect.gen(function* () {
-      const level = options.level as SkillLevel;
-
-      // Validate level
-      const validLevels: SkillLevel[] = ["beginner", "intermediate", "advanced", "complete"];
-      if (!validLevels.includes(level)) {
-        yield* Console.error(`Invalid level: ${level}. Must be one of: ${validLevels.join(", ")}`);
-        return yield* Effect.fail(new Error(`Invalid level: ${level}`));
-      }
-
-      yield* Console.log(`Installing Effect patterns for Claude Code (${level} level)...`);
+      yield* Console.log("Installing Effect patterns for Claude Code...");
 
       // Get paths
       const packageRoot = getPackageRoot();
       const targetDir = path.join(process.cwd(), ".claude", "rules");
-
-      let sourceFile: string;
-      let targetFile: string;
-
-      if (level === "complete") {
-        sourceFile = path.join(packageRoot, "rules", "complete", "effect-patterns-rules.md");
-        targetFile = path.join(targetDir, "effect-patterns-complete.md");
-      } else {
-        sourceFile = path.join(packageRoot, "rules", "by-skill-level", `${level}.md`);
-        targetFile = path.join(targetDir, `effect-patterns-${level}.md`);
-      }
+      const sourceFile = path.join(packageRoot, "rules", "effect-patterns-rules.md");
+      const targetFile = path.join(targetDir, "effect-patterns.md");
 
       // Create target directory
       yield* Effect.tryPromise({
@@ -80,16 +53,13 @@ const mainCommand = Command.make("effect-claude-kit", {
       yield* Console.log(`\nNext steps:`);
       yield* Console.log(`  1. Open your project in Claude Code`);
       yield* Console.log(`  2. Start coding with Effect - Claude will use these patterns`);
-      yield* Console.log(`\nTo upgrade:`);
-      yield* Console.log(`  npx effect-claude-kit install --level intermediate`);
-      yield* Console.log(`  npx effect-claude-kit install --level advanced`);
-      yield* Console.log(`  npx effect-claude-kit install --level complete`);
+      yield* Console.log(`\nThe complete ruleset (700+ patterns, 797KB) is now available to Claude.`);
     })
   )
 );
 
 const cli = Command.run(mainCommand, {
-  name: "Effect Claude Kit",
+  name: "Effect Claude Primitives",
   version: "1.0.0",
 });
 

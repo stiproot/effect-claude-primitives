@@ -10,8 +10,8 @@ This guide shows how to configure Effect patterns for Claude Code.
 # Install package
 npm install -D effect-claude-primitives
 
-# Install rules
-npx effect-claude-kit install --target claude --level beginner
+# Install complete Effect patterns
+npx effect-claude-primitives
 ```
 
 ### Option 2: Manual Installation
@@ -23,8 +23,8 @@ npm install -D effect-claude-primitives
 # Create directory
 mkdir -p .claude/rules
 
-# Copy rules
-cp node_modules/effect-claude-primitives/rules/by-skill-level/beginner.md \
+# Copy complete rules (700+ patterns)
+cp node_modules/effect-claude-primitives/rules/effect-patterns-rules.md \
    .claude/rules/effect-patterns.md
 ```
 
@@ -70,40 +70,18 @@ cp node_modules/effect-claude-primitives/skills/effect-service-pattern/SKILL.md 
    .claude/skills/effect-service-pattern/
 ```
 
-## Progressive Learning
+## What Gets Installed
 
-Start with beginner rules and progressively add more:
+The CLI installs the complete Effect patterns ruleset (797KB, 700+ patterns) to `.claude/rules/effect-patterns.md`.
 
-```bash
-# 1. Start with beginner
-npx effect-claude-kit install --target claude --level beginner
-
-# 2. Add intermediate when comfortable
-npx effect-claude-kit install --target claude --level intermediate
-
-# 3. Add advanced patterns
-npx effect-claude-kit install --target claude --level advanced
-
-# 4. Or install everything
-npx effect-claude-kit install --target claude --level complete
-```
-
-## Category-Specific Rules
-
-Install only rules for specific topics:
-
-```bash
-# Error handling
-npx effect-claude-kit install --target claude --category error-management
-
-# Concurrency
-npx effect-claude-kit install --target claude --category concurrency
-
-# Schema validation
-npx effect-claude-kit install --target claude --category schema
-```
-
-See [README.md](../README.md) for the complete list of categories.
+This includes all Effect patterns across all topics:
+- Core concepts and fundamentals
+- Error management and resilience
+- Concurrency and parallel execution
+- Schema validation
+- Streams and data processing
+- Testing patterns
+- And much more...
 
 ## Verifying Installation
 
@@ -128,6 +106,6 @@ You can customize the rules by editing the files in `.claude/rules/` to match yo
 
 ## Next Steps
 
-- Read [progressive learning path](../README.md#progressive-learning-path)
-- See [CLI commands reference](../README.md#cli-commands-reference)
-- Explore [customization options](../README.md#customization)
+- Start coding with Effect - Claude will use these comprehensive patterns
+- Explore [customization options](../README.md#customization) to adapt rules to your project
+- Check [available categories](../README.md#available-categories) to see what's covered
