@@ -4,17 +4,29 @@ This guide shows how to configure Effect patterns for Claude Code.
 
 ## Quick Start
 
-### Option 1: CLI Installer (Recommended)
+### Option 1: CLI Installer with Starter Preset (Recommended)
 
 ```bash
 # Install package
 npm install -D effect-claude-primitives
 
-# Install complete Effect patterns
-npx effect-claude-primitives
+# Install recommended starter categories (~256KB)
+npx effect-claude-primitives --starter
 ```
 
-### Option 2: Manual Installation
+This installs 6 essential categories optimized for getting started with Effect.
+
+### Option 2: CLI with Custom Categories
+
+```bash
+# List available categories
+npx effect-claude-primitives --list
+
+# Install specific categories
+npx effect-claude-primitives --categories=core-concepts,error-management,testing
+```
+
+### Option 3: Manual Installation
 
 ```bash
 # Install package
@@ -23,35 +35,41 @@ npm install -D effect-claude-primitives
 # Create directory
 mkdir -p .claude/rules
 
-# Copy complete rules (700+ patterns)
-cp node_modules/effect-claude-primitives/rules/effect-patterns-rules.md \
-   .claude/rules/effect-patterns.md
+# Copy specific category files (30-66KB each)
+cp node_modules/effect-claude-primitives/rules/by-category/core-concepts.md .claude/rules/
+cp node_modules/effect-claude-primitives/rules/by-category/error-management.md .claude/rules/
+cp node_modules/effect-claude-primitives/rules/by-category/testing.md .claude/rules/
 ```
 
 ## Configuration Methods
 
-### Method 1: Direct Rules File
+### Method 1: Category-Based Rules (Recommended)
 
-Create `.claude/rules/effect-patterns.md`:
+After running the CLI, you'll have multiple category files:
 
 ```
 my-project/
 ├── .claude/
 │   └── rules/
-│       └── effect-patterns.md  ← Claude reads this automatically
+│       ├── core-concepts.md       (66KB)
+│       ├── error-management.md    (35KB)
+│       ├── testing.md             (37KB)
+│       ├── building-apis.md       (53KB)
+│       ├── concurrency.md         (62KB)
+│       └── getting-started.md     (3KB)
 └── CLAUDE.md
 ```
 
-Claude Code will automatically load rules from any `.md` files in `.claude/rules/`.
+Claude Code automatically loads all `.md` files from `.claude/rules/`.
 
-### Method 2: Reference in CLAUDE.md
+### Method 2: Reference in CLAUDE.md (Optional)
 
 Create or edit `CLAUDE.md` in your project root:
 
 ```markdown
 # Project Instructions
 
-For Effect-TS patterns, see `.claude/rules/effect-patterns.md`
+Effect-TS patterns are available in `.claude/rules/` - Claude automatically loads them.
 
 ## Architecture
 [Your architecture description]
@@ -72,16 +90,26 @@ cp node_modules/effect-claude-primitives/skills/effect-service-pattern/SKILL.md 
 
 ## What Gets Installed
 
-The CLI installs the complete Effect patterns ruleset (797KB, 700+ patterns) to `.claude/rules/effect-patterns.md`.
+### With --starter (Recommended)
 
-This includes all Effect patterns across all topics:
-- Core concepts and fundamentals
-- Error management and resilience
-- Concurrency and parallel execution
-- Schema validation
-- Streams and data processing
-- Testing patterns
-- And much more...
+Installs 6 essential categories (~256KB total) to `.claude/rules/`:
+
+- **Core Concepts** (66KB) - Effect.gen, pipe, map, flatMap, Option, Either
+- **Error Management** (35KB) - catchTag/catchAll, retry, Cause
+- **Testing** (37KB) - Mock layers, testing services, property-based testing
+- **Building APIs** (53KB) - HTTP APIs, routing, middleware, authentication
+- **Concurrency** (62KB) - Parallel execution, fibers, Deferred, Semaphore
+- **Getting Started** (3KB) - New Effect projects, first programs
+
+### With --categories
+
+Installs only the categories you specify.
+
+### With --all
+
+Installs all 24 categories (816KB total) - may impact Claude Code performance.
+
+**Performance Note**: Claude Code recommends individual files under 40KB. The category-based approach keeps files within this limit.
 
 ## Verifying Installation
 

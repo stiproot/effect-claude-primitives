@@ -4,10 +4,13 @@
 
 ## What's Inside?
 
-- **Complete Rules** (797KB): All 700+ Effect patterns in one comprehensive file
-- **Category Rules**: 24 topic-specific files (error-management, concurrency, schema, streams, etc.) for focused work
+- **Category Rules**: 24 topic-specific files (30-66KB each) for selective installation
+- **Starter Preset**: 6 recommended categories (~256KB) - perfect for getting started
+- **Complete Rules** (816KB): All 700+ Effect patterns (available in rules/ directory)
 - **Skills**: Pre-configured agent skills for Cursor
 - **Templates**: Project setup templates
+
+**Performance Note**: Claude Code recommends individual files under 40KB. The CLI installs category-based rules to stay within performance limits.
 
 ## Quick Start
 
@@ -20,8 +23,8 @@ git clone https://github.com/stiproot/effect-claude-primitives.git
 cd effect-claude-primitives
 
 # 2. Install dependencies and build
-npm install
-npm run build
+bun install
+bun run build
 
 # 3. Link it globally
 npm link
@@ -30,8 +33,8 @@ npm link
 cd ~/my-effect-project
 npm link effect-claude-primitives
 
-# 5. Install complete rules
-npx effect-claude-primitives
+# 5. Install starter categories (recommended)
+npx effect-claude-primitives --starter
 ```
 
 #### Option B: Manual Copy (Simplest for Testing)
@@ -39,9 +42,12 @@ npx effect-claude-primitives
 # 1. Clone the primitives repo
 git clone https://github.com/stiproot/effect-claude-primitives.git
 
-# 2. Copy complete rules to your project
-cp effect-claude-primitives/rules/effect-patterns-rules.md \
-   ~/my-effect-project/.claude/rules/effect-patterns.md
+# 2. Copy specific categories to your project
+cp effect-claude-primitives/rules/by-category/core-concepts.md \
+   ~/my-effect-project/.claude/rules/
+cp effect-claude-primitives/rules/by-category/error-management.md \
+   ~/my-effect-project/.claude/rules/
+# ... add more categories as needed
 ```
 
 ### Production Use (After NPM Publication)
@@ -51,8 +57,12 @@ cp effect-claude-primitives/rules/effect-patterns-rules.md \
 # Install the package
 npm install -D effect-claude-primitives
 
-# Install complete Effect patterns
-npx effect-claude-primitives
+# Install starter categories (recommended, ~256KB)
+npx effect-claude-primitives --starter
+
+# Or list and select specific categories
+npx effect-claude-primitives --list
+npx effect-claude-primitives --categories=core-concepts,error-management,testing
 ```
 
 #### Option 2: Manual Installation
@@ -60,42 +70,50 @@ npx effect-claude-primitives
 # Install the package
 npm install -D effect-claude-primitives
 
-# Copy rules manually
-cp node_modules/effect-claude-primitives/rules/effect-patterns-rules.md \
-   .claude/rules/effect-patterns.md
+# Copy specific category files manually
+mkdir -p .claude/rules
+cp node_modules/effect-claude-primitives/rules/by-category/core-concepts.md .claude/rules/
+cp node_modules/effect-claude-primitives/rules/by-category/error-management.md .claude/rules/
+# ... add more categories as needed
 ```
 
 ## Claude Code Configuration
 
-Once installed, Claude Code will read rules from your project:
+Once installed, Claude Code will automatically read all `.md` files from `.claude/rules/`:
 
-### Method 1: Direct Rules File
+### After Running --starter
 ```
 my-effect-project/
 ├── .claude/
 │   └── rules/
-│       └── effect-patterns.md  ← Claude reads this automatically
+│       ├── core-concepts.md       (66KB)
+│       ├── error-management.md    (35KB)
+│       ├── testing.md             (37KB)
+│       ├── building-apis.md       (53KB)
+│       ├── concurrency.md         (62KB)
+│       └── getting-started.md     (3KB)
 └── CLAUDE.md
 ```
 
-### Method 2: Reference in CLAUDE.md
+### Optional: Reference in CLAUDE.md
 ```markdown
 <!-- CLAUDE.md -->
 # Project Instructions
 
-For Effect-TS patterns, see `.claude/rules/effect-patterns.md`
+Effect-TS patterns are available in `.claude/rules/` - Claude will automatically load them.
 
 ## Additional Context
 [Your project-specific instructions]
 ```
 
-### Method 3: Skills (Advanced)
+### Advanced: Skills (For Cursor)
 ```
 my-effect-project/
 ├── .claude/
-│   └── skills/
+│   ├── rules/          ← For Claude Code
+│   └── skills/         ← For Cursor
 │       └── effect-service-pattern/
-│           └── SKILL.md  ← Claude can use this as a skill
+│           └── SKILL.md
 └── CLAUDE.md
 ```
 
@@ -108,14 +126,52 @@ my-effect-project/
 
 ## Usage
 
-Simply run the CLI to install comprehensive Effect patterns:
+The CLI installs Effect patterns by category to avoid performance issues with large files.
+
+### Recommended: Starter Preset
+
+Install 6 recommended categories for getting started (~256KB total):
 
 ```bash
-# Install complete Effect patterns (700+ patterns, 797KB)
-npx effect-claude-primitives
+bun x effect-claude-primitives --starter
+# or: npx effect-claude-primitives --starter
 ```
 
-This installs all Effect patterns to `.claude/rules/effect-patterns.md` in your project.
+Installs:
+- Core Concepts (66KB) - Effect.gen, pipe, map, flatMap, Option, Either
+- Error Management (35KB) - catchTag/catchAll, retry, Cause
+- Testing (37KB) - Mock layers, testing services
+- Building APIs (53KB) - HTTP APIs, routing, middleware
+- Concurrency (62KB) - Parallel execution, fibers
+- Getting Started (3KB) - New Effect projects
+
+### List Available Categories
+
+```bash
+bun x effect-claude-primitives --list
+```
+
+### Install Specific Categories
+
+```bash
+bun x effect-claude-primitives --categories=error-management,streams,observability
+```
+
+### Install All Categories
+
+⚠️ Warning: Installs all 24 categories (816KB total) - may trigger performance warnings:
+
+```bash
+bun x effect-claude-primitives --all
+```
+
+### Default Behavior
+
+Running without flags installs the starter preset:
+
+```bash
+bun x effect-claude-primitives
+```
 
 ## Available Categories
 
