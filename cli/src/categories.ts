@@ -85,6 +85,13 @@ export const categories: Category[] = [
     recommended: false
   },
   {
+    id: "mcp-server",
+    title: "MCP Server Development",
+    description: "Building Model Context Protocol servers with Express + Effect-TS",
+    size: "~12KB",
+    recommended: false
+  },
+  {
     id: "observability",
     title: "Observability",
     description: "Logging, metrics, tracing, OpenTelemetry",

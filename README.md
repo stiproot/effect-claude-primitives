@@ -4,9 +4,9 @@
 
 ## What's Inside?
 
-- **Category Rules**: 24 topic-specific files (30-66KB each) for selective installation
+- **Category Rules**: 25 topic-specific files (2-66KB each) for selective installation
 - **Starter Preset**: 6 recommended categories (~256KB) - perfect for getting started
-- **Complete Rules** (816KB): All 700+ Effect patterns (available in rules/ directory)
+- **Complete Rules** (828KB): All 700+ Effect patterns (available in rules/ directory)
 - **Skills**: Pre-configured agent skills for Cursor
 - **Templates**: Project setup templates
 
@@ -186,6 +186,7 @@ bun x effect-claude-primitives
 - `error-management` - catchTag/catchAll, retry, Cause
 - `getting-started` - New Effect projects, first programs
 - `making-http-requests` - HttpClient, timeouts, caching
+- `mcp-server` - Building Model Context Protocol servers with Express + Effect-TS
 - `observability` - Logging, metrics, tracing, OpenTelemetry
 - `platform` - Filesystem, shell commands, environment variables
 - `platform-getting-started` - Platform fundamentals
