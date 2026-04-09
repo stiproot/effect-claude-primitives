@@ -107,7 +107,7 @@ Installs only the categories you specify.
 
 ### With --all
 
-Installs all 24 categories (816KB total) - may impact Claude Code performance.
+Installs all 25 categories (828KB total) - may impact Claude Code performance.
 
 **Performance Note**: Claude Code recommends individual files under 40KB. The category-based approach keeps files within this limit.
 

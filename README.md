@@ -159,7 +159,7 @@ bun x effect-claude-primitives --categories=error-management,streams,observabili
 
 ### Install All Categories
 
-⚠️ Warning: Installs all 24 categories (816KB total) - may trigger performance warnings:
+⚠️ Warning: Installs all 25 categories (828KB total) - may trigger performance warnings:
 
 ```bash
 bun x effect-claude-primitives --all

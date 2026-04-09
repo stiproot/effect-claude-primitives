@@ -94,7 +94,7 @@ npx effect-claude-kit install --target windsurf --category concurrency
 npx effect-claude-kit install --target windsurf --category schema
 ```
 
-See [README.md](../README.md#available-categories) for all 24 categories.
+See [README.md](../README.md#available-categories) for all 25 categories.
 
 ## Progressive Learning Path
 
