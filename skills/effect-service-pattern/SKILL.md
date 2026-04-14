@@ -1,6 +1,9 @@
 ---
 name: effect-service-pattern
 description: Effect-TS service patterns for composable, type-safe dependency injection. Use when implementing services, following Effect.Service patterns, Layer composition, and error-handling conventions.
+source-rules:
+  - core-concepts.md
+  - error-management.md
 ---
 
 # Effect Patterns – Service Pattern

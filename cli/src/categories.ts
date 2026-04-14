@@ -36,6 +36,13 @@ export const categories: Category[] = [
     recommended: false
   },
   {
+    id: "core-concepts-minimal",
+    title: "Core Concepts (Minimal)",
+    description: "Essential Effect-TS concepts: type signature, gen, pipe, errors, services, layers — compact startup reference",
+    size: "~10KB",
+    recommended: true
+  },
+  {
     id: "core-concepts",
     title: "Core Concepts",
     description: "Effect.gen, pipe, map, flatMap, Option, Either",
