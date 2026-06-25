@@ -1,7 +1,7 @@
 {
   "name": "effect-claude-primitives",
   "version": "1.0.0",
-  "description": "Drop-in Claude primitives for Effect-TS projects - 700+ patterns as AI-readable rules",
+  "description": "Drop-in Claude primitives for Effect-TS projects - 700+ patterns as on-demand Claude Code skills",
   "type": "module",
   "bin": {
     "effect-claude-primitives": "./cli/dist/install.js"

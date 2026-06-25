@@ -2,19 +2,11 @@
 
 This guide shows how to configure Effect patterns for Windsurf IDE.
 
+Windsurf does not consume Claude Code skills. The CLI installs skills for Claude Code
+under `.claude/skills/`; for Windsurf, copy the pattern content from a skill's
+`references/` directory into a Windsurf rules file.
+
 ## Quick Start
-
-### Option 1: CLI Installer (Recommended)
-
-```bash
-# Install package
-npm install -D effect-claude-primitives
-
-# Install rules
-npx effect-claude-kit install --target windsurf --level beginner
-```
-
-### Option 2: Manual Installation
 
 ```bash
 # Install package
@@ -23,9 +15,9 @@ npm install -D effect-claude-primitives
 # Create directory
 mkdir -p .windsurf/rules
 
-# Copy rules
-cp node_modules/effect-claude-primitives/rules/by-skill-level/beginner.md \
-   .windsurf/rules/effect-patterns.md
+# Copy a skill's reference content into a Windsurf rules file
+cat node_modules/effect-claude-primitives/skills/effect-error-handling/references/*.md \
+   > .windsurf/rules/effect-patterns.md
 ```
 
 ## Windsurf Configuration
@@ -60,61 +52,35 @@ alwaysApply: false
 
 ## Installation Options
 
-### By Skill Level
-
-```bash
-# Beginner (recommended for learning)
-npx effect-claude-kit install --target windsurf --level beginner
-
-# Intermediate
-npx effect-claude-kit install --target windsurf --level intermediate
-
-# Advanced
-npx effect-claude-kit install --target windsurf --level advanced
-
-# Complete (all patterns)
-npx effect-claude-kit install --target windsurf --level complete
-```
-
-### By Category
-
-Install specific categories:
+Pick the skills relevant to your work and copy their `references/` content into
+`.windsurf/rules/`. Each skill covers one topic.
 
 ```bash
 # Core concepts
-npx effect-claude-kit install --target windsurf --category core-concepts
+cat node_modules/effect-claude-primitives/skills/effect-core-concepts/references/*.md \
+   > .windsurf/rules/effect-core-concepts.md
 
-# Error management
-npx effect-claude-kit install --target windsurf --category error-management
+# Error handling
+cat node_modules/effect-claude-primitives/skills/effect-error-handling/references/*.md \
+   > .windsurf/rules/effect-error-handling.md
 
 # Concurrency
-npx effect-claude-kit install --target windsurf --category concurrency
-
-# Schema validation
-npx effect-claude-kit install --target windsurf --category schema
+cat node_modules/effect-claude-primitives/skills/effect-concurrency/references/*.md \
+   > .windsurf/rules/effect-concurrency.md
 ```
 
-See [README.md](../README.md#available-categories) for all 25 categories.
+See [README.md](../README.md#available-skills) for all 17 skills.
 
-## Progressive Learning Path
-
-Recommended approach:
+## Suggested Order
 
 ```bash
-# Week 1: Core concepts and getting started
-npx effect-claude-kit install --target windsurf --category getting-started
-npx effect-claude-kit install --target windsurf --category core-concepts
+# Start with the fundamentals
+cat node_modules/effect-claude-primitives/skills/effect-getting-started/references/*.md \
+   > .windsurf/rules/effect-getting-started.md
+cat node_modules/effect-claude-primitives/skills/effect-core-concepts/references/*.md \
+   > .windsurf/rules/effect-core-concepts.md
 
-# Week 2: Error handling
-npx effect-claude-kit install --target windsurf --category error-management
-
-# Week 3: Concurrency
-npx effect-claude-kit install --target windsurf --category concurrency
-
-# Week 4: Testing
-npx effect-claude-kit install --target windsurf --category testing
-
-# Later: Add more categories as needed
+# Then error handling, concurrency, testing, and more as needed
 ```
 
 ## Verifying Installation
@@ -128,8 +94,7 @@ Test: Type `Effect.gen` and Windsurf should suggest proper Effect generator patt
 
 ## Tips
 
-- **Category-Specific**: Install only categories relevant to your current work
-- **Progressive**: Start with beginner or getting-started, add more as you learn
+- **Topic-Specific**: Copy only the skills relevant to your current work
 - **Customize**: Edit files in `.windsurf/rules/` to match your project
 
 ## Troubleshooting
@@ -143,7 +108,7 @@ Test: Type `Effect.gen` and Windsurf should suggest proper Effect generator patt
 
 ### Too many suggestions
 
-- Install fewer categories
+- Copy fewer skills
 - Use `.mdc` format with `alwaysApply: false`
 - Edit files to keep only most relevant patterns
 
@@ -180,7 +145,5 @@ Add project-specific rules to the installed files:
 
 ## Next Steps
 
-- Explore [available categories](../README.md#available-categories)
-- Read [progressive learning path](../README.md#progressive-learning-path)
-- See [CLI commands reference](../README.md#cli-commands-reference)
+- Explore [available skills](../README.md#available-skills)
 - Learn about [customization](../README.md#customization)

@@ -1,5 +1,16 @@
 # making-http-requests Patterns
 
+- Add Timeouts to HTTP Requests
+- Build a Basic HTTP Server
+- Cache HTTP Responses
+- Create a Testable HTTP Client Service
+- Handle Rate Limiting Responses
+- Log HTTP Requests and Responses
+- Model Dependencies as Services
+- Parse JSON Responses Safely
+- Retry HTTP Requests with Backoff
+- Your First HTTP Request
+
 ## Add Timeouts to HTTP Requests
 
 Always set timeouts on HTTP requests to ensure your application doesn't hang.

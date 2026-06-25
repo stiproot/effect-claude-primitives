@@ -2,12 +2,20 @@
 
 ## Effect Patterns
 
-This project uses Effect-TS. For comprehensive Effect patterns, see:
-- `.claude/rules/effect-patterns.md` - Effect coding rules
+This project uses Effect-TS. Effect patterns are installed as Claude Code skills
+under `.claude/skills/`. Claude Code loads each skill on demand – the full content
+is only pulled into context when the skill's description matches the task, so there
+is no eager-loading cost.
 
-Or install specific rule levels:
+Install the recommended starter set:
 ```bash
-npx effect-claude-kit install --target claude --level beginner
+npx effect-claude-primitives --starter
+```
+
+List every available skill, or install a specific subset:
+```bash
+npx effect-claude-primitives --list
+npx effect-claude-primitives --skills effect-core-concepts,effect-error-handling,effect-testing
 ```
 
 ## Project-Specific Instructions

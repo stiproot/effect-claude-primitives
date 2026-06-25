@@ -2,18 +2,26 @@
 
 ## Effect-TS Patterns
 
-This project uses Effect-TS. Install category-specific rules:
+This project uses Effect-TS. Effect patterns ship as skills under `.claude/skills/`,
+loaded on demand by Claude Code.
+
+Install the recommended starter set:
 
 ```bash
-npx effect-claude-kit install --target cursor --category error-management
-npx effect-claude-kit install --target cursor --category concurrency
-npx effect-claude-kit install --target cursor --category schema
+npx effect-claude-primitives --starter
 ```
 
-Or install all rules:
+List every available skill, or install a specific subset:
 
 ```bash
-npx effect-claude-kit install --target cursor --level complete
+npx effect-claude-primitives --list
+npx effect-claude-primitives --skills effect-error-handling,effect-concurrency
+```
+
+Install all skills:
+
+```bash
+npx effect-claude-primitives --all
 ```
 
 ## Project Rules

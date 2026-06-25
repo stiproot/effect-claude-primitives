@@ -4,17 +4,11 @@ This guide shows how to configure Effect patterns for Cursor IDE.
 
 ## Quick Start
 
-### Option 1: CLI Installer (Recommended)
+Cursor does not consume Claude Code skills. The CLI installs skills for Claude Code
+under `.claude/skills/`; for Cursor, copy the pattern content from a skill's
+`references/` directory into a Cursor rules file as shown below.
 
-```bash
-# Install package
-npm install -D effect-claude-primitives
-
-# Install rules
-npx effect-claude-kit install --target cursor --level beginner
-```
-
-### Option 2: Manual Installation
+### Manual Installation
 
 ```bash
 # Install package
@@ -23,9 +17,9 @@ npm install -D effect-claude-primitives
 # Create directory
 mkdir -p .cursor/rules
 
-# Copy rules
-cp node_modules/effect-claude-primitives/rules/by-skill-level/beginner.md \
-   .cursor/rules/effect-patterns.md
+# Copy a skill's reference content into a Cursor rules file
+cat node_modules/effect-claude-primitives/skills/effect-error-handling/references/*.md \
+   > .cursor/rules/effect-patterns.md
 ```
 
 ## Cursor Configuration
@@ -58,62 +52,34 @@ alwaysApply: false
 [Rules content...]
 ```
 
-Install category-specific `.mdc` files:
+Build a `.mdc` file from a skill's reference content:
 
 ```bash
-npx effect-claude-kit install --target cursor --category error-management
-npx effect-claude-kit install --target cursor --category concurrency
-npx effect-claude-kit install --target cursor --category schema
+cat node_modules/effect-claude-primitives/skills/effect-error-handling/references/*.md \
+   > .cursor/rules/effect-error-handling.mdc
+# then add the .mdc frontmatter shown above to the top of the file
 ```
 
-## Skills
+## Picking Skills
 
-Copy the Effect service pattern skill to Cursor:
+The pattern content lives in the skill directories under
+`node_modules/effect-claude-primitives/skills/`. Each skill's `references/`
+directory holds the full patterns for one topic – `effect-core-concepts`,
+`effect-error-handling`, `effect-concurrency`, `effect-testing`, and so on.
 
-```bash
-mkdir -p .cursor/skills/effect-service-pattern
-cp node_modules/effect-claude-primitives/skills/effect-service-pattern/SKILL.md \
-   .cursor/skills/effect-service-pattern/
-```
-
-## Progressive Learning
-
-```bash
-# 1. Beginner rules
-npx effect-claude-kit install --target cursor --level beginner
-
-# 2. Intermediate rules
-npx effect-claude-kit install --target cursor --level intermediate
-
-# 3. Advanced rules
-npx effect-claude-kit install --target cursor --level advanced
-
-# 4. Complete rules
-npx effect-claude-kit install --target cursor --level complete
-```
-
-## Category-Specific Installation
-
-Install only the categories you need:
+Copy only the topics relevant to your current work:
 
 ```bash
 # Core concepts
-npx effect-claude-kit install --target cursor --category core-concepts
+cat node_modules/effect-claude-primitives/skills/effect-core-concepts/references/*.md \
+   > .cursor/rules/effect-core-concepts.md
 
-# Error management
-npx effect-claude-kit install --target cursor --category error-management
-
-# Concurrency
-npx effect-claude-kit install --target cursor --category concurrency
-
-# Schema validation
-npx effect-claude-kit install --target cursor --category schema
-
-# Testing
-npx effect-claude-kit install --target cursor --category testing
+# Error handling
+cat node_modules/effect-claude-primitives/skills/effect-error-handling/references/*.md \
+   > .cursor/rules/effect-error-handling.md
 ```
 
-See [README.md](../README.md#available-categories) for all available categories.
+See [README.md](../README.md#available-skills) for the full list of skills.
 
 ## Verifying Installation
 
@@ -124,8 +90,7 @@ See [README.md](../README.md#available-categories) for all available categories.
 
 ## Tips
 
-- **Category-Specific**: Install only categories relevant to your current work for focused assistance
-- **Progressive**: Start with beginner, add more as you learn
+- **Topic-Specific**: Copy only the skills relevant to your current work for focused assistance
 - **Customize**: Edit files in `.cursor/rules/` to match your project conventions
 
 ## Troubleshooting
@@ -138,10 +103,9 @@ See [README.md](../README.md#available-categories) for all available categories.
 
 ### Too many suggestions
 
-Install fewer categories or use `.mdc` files with `alwaysApply: false` to make rules contextual.
+Copy fewer skills or use `.mdc` files with `alwaysApply: false` to make rules contextual.
 
 ## Next Steps
 
-- Explore [available categories](../README.md#available-categories)
-- Read [progressive learning path](../README.md#progressive-learning-path)
+- Explore [available skills](../README.md#available-skills)
 - See [customization guide](../README.md#customization)

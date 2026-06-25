@@ -2,12 +2,15 @@
 
 ## Effect Skills
 
-This project uses Effect-TS patterns. Effect coding rules have been configured for AI assistance.
+This project uses Effect-TS patterns, installed as skills under `.claude/skills/`.
+Each skill is loaded on demand when its description matches the task at hand.
 
 ### Installed Effect Skills
 
 <!-- EFFECT_SKILLS_AGENT_START -->
-Effect patterns installed via `effect-claude-kit install --target agent`
+Effect skills installed via `npx effect-claude-primitives --starter`.
+Run `npx effect-claude-primitives --list` to see every available skill, or
+`npx effect-claude-primitives --skills skill1,skill2` to install a specific subset.
 <!-- EFFECT_SKILLS_AGENT_END -->
 
 ## Project-Specific Agent Instructions

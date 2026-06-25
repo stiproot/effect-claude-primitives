@@ -1,16 +1,14 @@
 # Effect Claude Primitives
 
-700+ Effect-TS patterns as AI-readable rules for Claude Code, Cursor, GitHub Copilot, and Windsurf.
+700+ Effect-TS patterns delivered as Claude Code skills.
 
 ## What's Inside?
 
-- **Category Rules**: 25 topic-specific files (2-66KB each) for selective installation
-- **Starter Preset**: 6 recommended categories (~256KB) - perfect for getting started
-- **Complete Rules** (828KB): All 700+ Effect patterns (available in rules/ directory)
-- **Skills**: Pre-configured agent skills for Cursor
-- **Templates**: Project setup templates
+- **Skills**: 17 Effect-TS skills, each a lean `SKILL.md` plus a `references/` directory holding the full pattern content. Claude Code loads each skill on demand – only the skill's name and description sit in context until the skill's description matches the task, at which point the `SKILL.md` body and any referenced files are pulled in. This progressive disclosure keeps the eager-loaded context small, so installing many skills carries no upfront cost.
+- **Starter Preset**: 6 recommended skills – perfect for getting started.
+- **Templates**: Project setup templates.
 
-**Performance Note**: Claude Code recommends individual files under 40KB. The CLI installs category-based rules to stay within performance limits.
+Skills install into `.claude/skills/`, not `.claude/rules/`. Files under `.claude/rules/` are auto-loaded in full on every session; skills are not, which is what avoids the context blow-up of shipping these patterns as rules.
 
 ## Quick Start
 
@@ -33,7 +31,7 @@ npm link
 cd ~/my-effect-project
 npm link effect-claude-primitives
 
-# 5. Install starter categories (recommended)
+# 5. Install starter skills (recommended)
 npx effect-claude-primitives --starter
 ```
 
@@ -42,12 +40,13 @@ npx effect-claude-primitives --starter
 # 1. Clone the primitives repo
 git clone https://github.com/stiproot/effect-claude-primitives.git
 
-# 2. Copy specific categories to your project
-cp effect-claude-primitives/rules/by-category/core-concepts.md \
-   ~/my-effect-project/.claude/rules/
-cp effect-claude-primitives/rules/by-category/error-management.md \
-   ~/my-effect-project/.claude/rules/
-# ... add more categories as needed
+# 2. Copy whole skill directories into your project
+mkdir -p ~/my-effect-project/.claude/skills
+cp -R effect-claude-primitives/skills/effect-core-concepts \
+   ~/my-effect-project/.claude/skills/
+cp -R effect-claude-primitives/skills/effect-error-handling \
+   ~/my-effect-project/.claude/skills/
+# ... add more skills as needed
 ```
 
 ### Production Use (After NPM Publication)
@@ -57,12 +56,12 @@ cp effect-claude-primitives/rules/by-category/error-management.md \
 # Install the package
 npm install -D effect-claude-primitives
 
-# Install starter categories (recommended, ~256KB)
+# Install starter skills (recommended)
 npx effect-claude-primitives --starter
 
-# Or list and select specific categories
+# Or list and select specific skills
 npx effect-claude-primitives --list
-npx effect-claude-primitives --categories=core-concepts,error-management,testing
+npx effect-claude-primitives --skills effect-core-concepts,effect-error-handling,effect-testing
 ```
 
 #### Option 2: Manual Installation
@@ -70,28 +69,30 @@ npx effect-claude-primitives --categories=core-concepts,error-management,testing
 # Install the package
 npm install -D effect-claude-primitives
 
-# Copy specific category files manually
-mkdir -p .claude/rules
-cp node_modules/effect-claude-primitives/rules/by-category/core-concepts.md .claude/rules/
-cp node_modules/effect-claude-primitives/rules/by-category/error-management.md .claude/rules/
-# ... add more categories as needed
+# Copy whole skill directories manually
+mkdir -p .claude/skills
+cp -R node_modules/effect-claude-primitives/skills/effect-core-concepts .claude/skills/
+cp -R node_modules/effect-claude-primitives/skills/effect-error-handling .claude/skills/
+# ... add more skills as needed
 ```
 
 ## Claude Code Configuration
 
-Once installed, Claude Code will automatically read all `.md` files from `.claude/rules/`:
+Once installed, Claude Code discovers the skills under `.claude/skills/` and loads each one on demand – only when its description matches the task in front of it.
 
 ### After Running --starter
 ```
 my-effect-project/
 ├── .claude/
-│   └── rules/
-│       ├── core-concepts.md       (66KB)
-│       ├── error-management.md    (35KB)
-│       ├── testing.md             (37KB)
-│       ├── building-apis.md       (53KB)
-│       ├── concurrency.md         (62KB)
-│       └── getting-started.md     (3KB)
+│   └── skills/
+│       ├── effect-getting-started/
+│       │   ├── SKILL.md
+│       │   └── references/
+│       ├── effect-core-concepts/
+│       ├── effect-service-pattern/
+│       ├── effect-error-handling/
+│       ├── effect-concurrency/
+│       └── effect-testing/
 └── CLAUDE.md
 ```
 
@@ -100,21 +101,10 @@ my-effect-project/
 <!-- CLAUDE.md -->
 # Project Instructions
 
-Effect-TS patterns are available in `.claude/rules/` - Claude will automatically load them.
+Effect-TS patterns are available as skills under `.claude/skills/` - Claude loads each one on demand.
 
 ## Additional Context
 [Your project-specific instructions]
-```
-
-### Advanced: Skills (For Cursor)
-```
-my-effect-project/
-├── .claude/
-│   ├── rules/          ← For Claude Code
-│   └── skills/         ← For Cursor
-│       └── effect-service-pattern/
-│           └── SKILL.md
-└── CLAUDE.md
 ```
 
 ## Installation Guides by Tool
@@ -126,11 +116,11 @@ my-effect-project/
 
 ## Usage
 
-The CLI installs Effect patterns by category to avoid performance issues with large files.
+The CLI installs Effect patterns as skills under `.claude/skills/`. Claude Code loads each skill on demand, so the number of installed skills does not bloat session context.
 
 ### Recommended: Starter Preset
 
-Install 6 recommended categories for getting started (~256KB total):
+Install the 6 recommended skills for getting started:
 
 ```bash
 bun x effect-claude-primitives --starter
@@ -138,28 +128,26 @@ bun x effect-claude-primitives --starter
 ```
 
 Installs:
-- Core Concepts (66KB) - Effect.gen, pipe, map, flatMap, Option, Either
-- Error Management (35KB) - catchTag/catchAll, retry, Cause
-- Testing (37KB) - Mock layers, testing services
-- Building APIs (53KB) - HTTP APIs, routing, middleware
-- Concurrency (62KB) - Parallel execution, fibers
-- Getting Started (3KB) - New Effect projects
+- `effect-getting-started` - First steps, running effects, project bootstrap
+- `effect-core-concepts` - Effect.gen, pipe, map/flatMap, Option, Either, Layers
+- `effect-service-pattern` - Effect.Service, Context.Tag, dependency injection
+- `effect-error-handling` - catchTag/catchAll, retry, timeouts, Cause
+- `effect-concurrency` - Fibers, parallel execution, Ref, Deferred, Semaphore
+- `effect-testing` - Mock layers, TestClock, property-based testing
 
-### List Available Categories
+### List Available Skills
 
 ```bash
 bun x effect-claude-primitives --list
 ```
 
-### Install Specific Categories
+### Install Specific Skills
 
 ```bash
-bun x effect-claude-primitives --categories=error-management,streams,observability
+bun x effect-claude-primitives --skills effect-error-handling,effect-streams,effect-observability
 ```
 
-### Install All Categories
-
-⚠️ Warning: Installs all 25 categories (828KB total) - may trigger performance warnings:
+### Install All Skills
 
 ```bash
 bun x effect-claude-primitives --all
@@ -173,34 +161,25 @@ Running without flags installs the starter preset:
 bun x effect-claude-primitives
 ```
 
-## Available Categories
+## Available Skills
 
-- `building-apis` - HTTP APIs, routing, middleware, authentication
-- `building-data-pipelines` - Data pipelines, backpressure, batching
-- `concurrency` - Parallel execution, fibers, Deferred, Semaphore
-- `concurrency-getting-started` - Concurrency fundamentals
-- `core-concepts` - Effect.gen, pipe, map, flatMap, Option, Either
-- `domain-modeling` - Brand, Schema contracts, TaggedError
-- `error-handling` - Error handling patterns
-- `error-handling-resilience` - Resilient error handling
-- `error-management` - catchTag/catchAll, retry, Cause
-- `getting-started` - New Effect projects, first programs
-- `making-http-requests` - HttpClient, timeouts, caching
-- `mcp-server` - Building Model Context Protocol servers with Express + Effect-TS
-- `observability` - Logging, metrics, tracing, OpenTelemetry
-- `platform` - Filesystem, shell commands, environment variables
-- `platform-getting-started` - Platform fundamentals
-- `project-setup--execution` - Project setup and execution
-- `resource-management` - acquireRelease, Scope, pools
-- `scheduling` - Repeated tasks, cron, debounce, throttle
-- `scheduling-periodic-tasks` - Periodic task scheduling
-- `schema` - Schema validation, parsing, transforms
-- `streams` - Stream, Sink, transforms, stateful operations
-- `streams-getting-started` - Streams fundamentals
-- `streams-sinks` - Working with Sinks
-- `testing` - Mock layers, testing services, property-based testing
-- `tooling-and-debugging` - Editor setup, CI/CD, linting
-- `value-handling` - Working with values in Effect
+- `effect-getting-started` - First steps, running effects, project bootstrap, building a Runtime
+- `effect-core-concepts` - The Effect<A, E, R> model, gen vs pipe, Option/Either, Data, Layers
+- `effect-service-pattern` - Effect.Service, Context.Tag, composing Layers, dependency injection
+- `effect-error-handling` - Tagged errors, catchTag/catchAll, retry, timeouts, Cause inspection
+- `effect-concurrency` - Fibers, fork/forEach/all, racing, Ref, Deferred, Semaphore, Queue, PubSub
+- `effect-testing` - Mock services, test Layers, TestClock, fast-check, testing streams
+- `effect-streams` - Stream and Sink patterns, backpressure, grouping, error handling
+- `effect-http-api` - Server-side HTTP with @effect/platform, routing, validation, middleware
+- `effect-http-client` - Outgoing HTTP, response parsing, timeouts, retry, caching
+- `effect-mcp-server` - Building Model Context Protocol servers with Effect-TS
+- `effect-domain-modeling` - Schema contracts, Brand, TaggedError, Option
+- `effect-data-pipelines` - End-to-end Stream pipelines, batching, backpressure, fan-out, DLQs
+- `effect-observability` - Logging, metrics, tracing with withSpan, OpenTelemetry
+- `effect-scheduling` - Schedule, retries, backoff, cron jobs, debounce/throttle, circuit breakers
+- `effect-platform` - @effect/platform OS operations: shell, FileSystem, paths, env via Config
+- `effect-resource-management` - acquireRelease, Scope, scoped Layers, Pool
+- `effect-tooling-debugging` - LSP, reading type errors, lint/CI, DevTools, profiling
 
 ## Customization
 

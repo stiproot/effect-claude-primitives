@@ -1,5 +1,23 @@
 # domain-modeling Patterns
 
+## Contents
+
+- Accumulate Multiple Errors with Either
+- Avoid Long Chains of .andThen; Use Generators Instead
+- Create Type-Safe Errors
+- Define Contracts Upfront with Schema
+- Define Type-Safe Errors with Data.TaggedError
+- Distinguish 'Not Found' from Errors
+- Handle Missing Values with Option
+- Model Optional Values Safely with Option
+- Model Validated Domain Types with Brand
+- Modeling Validated Domain Types with Brand
+- Parse and Validate Data with Schema.decode
+- Transform Data During Validation with Schema
+- Use Effect.gen for Business Logic
+- Validating and Parsing Branded Types
+- Your First Domain Model
+
 ## Accumulate Multiple Errors with Either
 
 Use Either to accumulate multiple validation errors instead of failing on the first one.

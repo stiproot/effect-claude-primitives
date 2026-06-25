@@ -2,6 +2,12 @@
 
 This guide shows how to configure Effect patterns for Claude Code.
 
+Effect patterns ship as skills. Claude Code loads each skill on demand – only the
+skill's name and description sit in context until the skill's description matches the
+task, at which point its `SKILL.md` body and referenced files are pulled in. Skills
+install into `.claude/skills/`, not `.claude/rules/`; files under `.claude/rules/` are
+auto-loaded in full on every session, which is exactly what skills avoid.
+
 ## Quick Start
 
 ### Option 1: CLI Installer with Starter Preset (Recommended)
@@ -10,20 +16,20 @@ This guide shows how to configure Effect patterns for Claude Code.
 # Install package
 npm install -D effect-claude-primitives
 
-# Install recommended starter categories (~256KB)
+# Install the recommended starter skills
 npx effect-claude-primitives --starter
 ```
 
-This installs 6 essential categories optimized for getting started with Effect.
+This installs 6 essential skills for getting started with Effect.
 
-### Option 2: CLI with Custom Categories
+### Option 2: CLI with Custom Skills
 
 ```bash
-# List available categories
+# List available skills
 npx effect-claude-primitives --list
 
-# Install specific categories
-npx effect-claude-primitives --categories=core-concepts,error-management,testing
+# Install specific skills
+npx effect-claude-primitives --skills effect-core-concepts,effect-error-handling,effect-testing
 ```
 
 ### Option 3: Manual Installation
@@ -33,43 +39,46 @@ npx effect-claude-primitives --categories=core-concepts,error-management,testing
 npm install -D effect-claude-primitives
 
 # Create directory
-mkdir -p .claude/rules
+mkdir -p .claude/skills
 
-# Copy specific category files (30-66KB each)
-cp node_modules/effect-claude-primitives/rules/by-category/core-concepts.md .claude/rules/
-cp node_modules/effect-claude-primitives/rules/by-category/error-management.md .claude/rules/
-cp node_modules/effect-claude-primitives/rules/by-category/testing.md .claude/rules/
+# Copy whole skill directories (SKILL.md + references/)
+cp -R node_modules/effect-claude-primitives/skills/effect-core-concepts .claude/skills/
+cp -R node_modules/effect-claude-primitives/skills/effect-error-handling .claude/skills/
+cp -R node_modules/effect-claude-primitives/skills/effect-testing .claude/skills/
 ```
 
-## Configuration Methods
+## Configuration
 
-### Method 1: Category-Based Rules (Recommended)
+### Skill Layout
 
-After running the CLI, you'll have multiple category files:
+After running the CLI, you'll have one directory per skill:
 
 ```
 my-project/
 ├── .claude/
-│   └── rules/
-│       ├── core-concepts.md       (66KB)
-│       ├── error-management.md    (35KB)
-│       ├── testing.md             (37KB)
-│       ├── building-apis.md       (53KB)
-│       ├── concurrency.md         (62KB)
-│       └── getting-started.md     (3KB)
+│   └── skills/
+│       ├── effect-getting-started/
+│       │   ├── SKILL.md
+│       │   └── references/
+│       ├── effect-core-concepts/
+│       ├── effect-service-pattern/
+│       ├── effect-error-handling/
+│       ├── effect-concurrency/
+│       └── effect-testing/
 └── CLAUDE.md
 ```
 
-Claude Code automatically loads all `.md` files from `.claude/rules/`.
+Claude Code discovers these skills automatically and triggers each one when its
+description matches the task.
 
-### Method 2: Reference in CLAUDE.md (Optional)
+### Optional: Reference in CLAUDE.md
 
 Create or edit `CLAUDE.md` in your project root:
 
 ```markdown
 # Project Instructions
 
-Effect-TS patterns are available in `.claude/rules/` - Claude automatically loads them.
+Effect-TS patterns are available as skills under `.claude/skills/` - Claude loads each one on demand.
 
 ## Architecture
 [Your architecture description]
@@ -78,38 +87,27 @@ Effect-TS patterns are available in `.claude/rules/` - Claude automatically load
 [Your coding conventions]
 ```
 
-### Method 3: Skills (Advanced)
-
-Copy the Effect service pattern skill:
-
-```bash
-mkdir -p .claude/skills/effect-service-pattern
-cp node_modules/effect-claude-primitives/skills/effect-service-pattern/SKILL.md \
-   .claude/skills/effect-service-pattern/
-```
-
 ## What Gets Installed
 
 ### With --starter (Recommended)
 
-Installs 6 essential categories (~256KB total) to `.claude/rules/`:
+Installs 6 essential skills into `.claude/skills/`:
 
-- **Core Concepts** (66KB) - Effect.gen, pipe, map, flatMap, Option, Either
-- **Error Management** (35KB) - catchTag/catchAll, retry, Cause
-- **Testing** (37KB) - Mock layers, testing services, property-based testing
-- **Building APIs** (53KB) - HTTP APIs, routing, middleware, authentication
-- **Concurrency** (62KB) - Parallel execution, fibers, Deferred, Semaphore
-- **Getting Started** (3KB) - New Effect projects, first programs
+- **effect-getting-started** - First steps, running effects, project bootstrap
+- **effect-core-concepts** - Effect.gen, pipe, map/flatMap, Option, Either, Layers
+- **effect-service-pattern** - Effect.Service, Context.Tag, dependency injection
+- **effect-error-handling** - catchTag/catchAll, retry, timeouts, Cause
+- **effect-concurrency** - Fibers, parallel execution, Ref, Deferred, Semaphore
+- **effect-testing** - Mock layers, TestClock, property-based testing
 
-### With --categories
+### With --skills
 
-Installs only the categories you specify.
+Installs only the skills you specify.
 
 ### With --all
 
-Installs all 25 categories (828KB total) - may impact Claude Code performance.
-
-**Performance Note**: Claude Code recommends individual files under 40KB. The category-based approach keeps files within this limit.
+Installs all 17 skills. Because skills load on demand, installing every skill does not
+add upfront context cost.
 
 ## Verifying Installation
 
@@ -118,22 +116,24 @@ After installation, Claude Code should recognize Effect patterns when:
 - Reviewing existing code
 - Suggesting improvements
 
-Test by asking Claude to "create an Effect service" - it should follow the patterns.
+Test by asking Claude to "create an Effect service" - it should trigger the
+`effect-service-pattern` skill and follow its patterns.
 
 ## Troubleshooting
 
-### Rules not loading
+### Skills not loading
 
-1. Check that files exist in `.claude/rules/` or `.claude/skills/`
-2. Ensure files are valid Markdown (`.md` extension)
-3. Restart Claude Code
+1. Check that skill directories exist under `.claude/skills/` and each has a `SKILL.md`
+2. Restart Claude Code
+3. Ask Claude directly about a topic the skill covers to confirm it triggers
 
-### Rules conflicting with project conventions
+### Skills conflicting with project conventions
 
-You can customize the rules by editing the files in `.claude/rules/` to match your project needs.
+You can customize a skill by editing the files in its `.claude/skills/<skill>/`
+directory to match your project needs.
 
 ## Next Steps
 
-- Start coding with Effect - Claude will use these comprehensive patterns
-- Explore [customization options](../README.md#customization) to adapt rules to your project
-- Check [available categories](../README.md#available-categories) to see what's covered
+- Start coding with Effect - Claude will trigger the relevant skill automatically
+- Explore [customization options](../README.md#customization) to adapt skills to your project
+- Check [available skills](../README.md#available-skills) to see what's covered
