@@ -1,0 +1,23 @@
+{
+  "name": "effect-primitives",
+  "description": "Effect-TS coding-pattern skills for Claude Code.",
+  "owner": {
+    "name": "Effect Patterns Community"
+  },
+  "plugins": [
+    {
+      "name": "effect-claude-primitives",
+      "source": "./",
+      "description": "Effect-TS coding patterns as progressively-disclosed Claude Code skills.",
+      "version": "1.0.0",
+      "repository": "https://github.com/stiproot/effect-claude-primitives",
+      "license": "MIT",
+      "keywords": [
+        "effect",
+        "effect-ts",
+        "typescript",
+        "functional-programming"
+      ]
+    }
+  ]
+}

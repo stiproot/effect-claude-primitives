@@ -1,0 +1,18 @@
+{
+  "name": "effect-claude-primitives",
+  "version": "1.0.0",
+  "description": "Effect-TS coding patterns as progressively-disclosed Claude Code skills – error handling, concurrency, streams, HTTP APIs and clients, services and dependency injection, domain modeling, data pipelines, scheduling, resource management, platform/OS operations, observability, testing, and tooling.",
+  "author": {
+    "name": "Effect Patterns Community"
+  },
+  "homepage": "https://github.com/stiproot/effect-claude-primitives#readme",
+  "repository": "https://github.com/stiproot/effect-claude-primitives",
+  "license": "MIT",
+  "keywords": [
+    "effect",
+    "effect-ts",
+    "typescript",
+    "functional-programming",
+    "skills"
+  ]
+}
